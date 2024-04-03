@@ -108,14 +108,14 @@ plt.show()
 # Create a Combined Variable for Velocity and Do a scatterplot for it
 Shots_made['Velocity'] = Shots_made['cvx'] * Shots_made['cvy'] * Shots_made['cvz']
 
-plt.figure(figsize=(8,6))
-plt.scatter(Shots_made['Velocity'], Shots_made['rt'])
-plt.colorbar(label = 'Shot Outcome')
-plt.xlabel('Shot Velocity')
-plt.ylabel('Release Time')
-plt.title('Basketball Shots: Velocity vs Release Time')
-plt.grid(True)
-plt.show()
+# plt.figure(figsize=(8,6))
+# plt.scatter(Shots_made['Velocity'], Shots_made['rt'])
+# plt.colorbar(label = 'Shot Outcome')
+# plt.xlabel('Shot Velocity')
+# plt.ylabel('Release Time')
+# plt.title('Basketball Shots: Velocity vs Release Time')
+# plt.grid(True)
+# plt.show()
 # Machine Learning Model Creation
 
 # The dataset is Extremly large so this code is implemented to allow you to process the data when training the model one chunk(part at a time)
@@ -152,3 +152,30 @@ for i, chunk in enumerate(data_set):
     accuracy = model.score(x_test, y_test)
     print(f'Accuracy on chunk {i+1}: {accuracy}')
 
+# The Next Steps 
+# 1. Create a Model removing certain uneccesary variables and determine which variables are the most important and comparing it to the accuracy of the original model
+
+# for i, chunk in enumerate(data_set):
+    #print(f'Processing chunk{i+1}')
+
+    # Split the dataset into different parts with some to be used to train and some being used to test
+    # Also Isolating the target variable to show what your trying to get the model to train based on
+    #columns_to_drop = ['made', 'fnm', 'lnm', 'pid']
+    #x = chunk.drop(columns = columns_to_drop)
+    # y = chunk['made']
+
+    # Then split the data into different parts for the training and testing
+    # x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state=56)
+
+    #Train the Model
+    # model.fit(x_train, y_train)
+
+    #
+    #prediction = model.predict(x_test)
+    #print(f'Prediction on chunk {i+1}: {prediction}')
+
+    #accuracy = model.score(x_test, y_test)
+    # print(f'Accuracy on chunk {i+1}: {accuracy}')
+#2. Check for any problems with the secondary model
+#3. Create an Interface to be ables to use the trained model 
+#4. Create a graphic to allow the user to input data to see if they can perform a good shot
