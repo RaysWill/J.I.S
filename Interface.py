@@ -27,34 +27,34 @@ import joblib
 # Read the saved trained model from your own pc and used it to make predictions for the user interface
 file_path = r"C:\Users\chess\OneDrive\Desktop\J.I.S Project\trained_model2.pk1"  # Specify the correct file name and path
 loaded_model = None
+#Attempts to open trained model and determine any issues
 if os.path.exists(file_path):
     try:
-        # Load the trained model from the file
         loaded_model = joblib.load(file_path)
         print("Model loaded successfully.")
     except Exception as e:
         print("Error occurred while loading the model:", e)
 else:
     print("File does not exist.")
-    # Use trained model to make prediction
+    
 
 
-# Create a window to display information
+# Creates a window to display information
 window = tk.Tk()
 window.title("Shot Prediction")
 
 # Function that allows you to make predictions based on user input
 def predict_shot():
-    # Retrieve user input from entry fields
+    #Takes the user input from the window to be used for predictions
     height = float(height_entry.get())
     power = float(power_entry.get())
     t = float(Release_Time_entry.get())
 
-    # 
+    # Creates probability variable
    
-    probability = loaded_model.predict_proba([[height, power, t]])[0][1]  # Probability of shot being made
+    probability = loaded_model.predict_proba([[height, power, t]])[0][1]  
     
-    # Display predicted probability
+    # Displays predicted probability
     result_label.config(text=f"Probability of shot being made: {probability:.2f}")
 
 # Code to create different labels and areas to take input from the user and display instruction to the user
