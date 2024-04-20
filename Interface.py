@@ -16,13 +16,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import MultinomialNB
 
+#Used to create the  interface of the model and display a window to take user input
 import tkinter as tk
 from PIL import Image, ImageTk
+#Used to import the trained model
 import joblib
 
-# The code below is used to read the datasets and save them to be able to accessed/referenced in the code later on.
 
 
+# Read the saved trained model from your own pc and used it to make predictions for the user interface
 file_path = r"C:\Users\chess\OneDrive\Desktop\J.I.S Project\trained_model2.pk1"  # Specify the correct file name and path
 loaded_model = None
 if os.path.exists(file_path):
@@ -37,25 +39,25 @@ else:
     # Use trained model to make prediction
 
 
-# Create a Tkinter window
+# Create a window to display information
 window = tk.Tk()
 window.title("Shot Prediction")
 
-# Function to make prediction based on user input
+# Function that allows you to make predictions based on user input
 def predict_shot():
     # Retrieve user input from entry fields
     height = float(height_entry.get())
     power = float(power_entry.get())
     t = float(Release_Time_entry.get())
 
-    # Add preprocessing steps here if needed
+    # 
    
     probability = loaded_model.predict_proba([[height, power, t]])[0][1]  # Probability of shot being made
     
     # Display predicted probability
     result_label.config(text=f"Probability of shot being made: {probability:.2f}")
 
-# Input fields for speed and acceleration
+# Code to create different labels and areas to take input from the user and display instruction to the user
 Distance_label = tk.Label(window, text = "Distance From Hoop is - 25FT")
 Distance_label.grid(row = 0, columnspan=2) 
 
@@ -75,14 +77,15 @@ Release_Time_entry = tk.Entry(window)
 Release_Time_entry.grid(row =3, column=1 )
 
 
-# Button to trigger prediction
+# Creates a Button to trigger a prediction
 predict_button = tk.Button(window, text="Predict", command=predict_shot)
 predict_button.grid(row=4, columnspan=2)
 
-# Label to display result
+# Displays the result of the prediction
 result_label = tk.Label(window, text="")
 result_label.grid(row=5, columnspan=2)
 
+#Displays an image of Basketball cour from saved image
 court = Image.open("Basketball_court.jpg")
 
 court_display = ImageTk.PhotoImage(court)
