@@ -15,8 +15,8 @@ import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import MultinomialNB
-
 import seaborn as sns
+
 # The following is the link to the datasets: https://www.inpredictable.com/2021/01/nba-player-shooting-motions-data-dump.html 
 # The code below is used to read the datasets and save them to be able to accessed/referenced in the code later on.
 
@@ -76,7 +76,7 @@ data_shuffled.to_csv('combined_shots.csv', index =False)
 
 
 
-
+#Reads the newly saved dataset 
 Shots = pd.read_csv('combined_shots.csv')
 
 
@@ -94,7 +94,7 @@ plt.title('Basketball Shots: Shot Duration vs Speed')
 plt.grid(True)
 plt.show()
 
-# Scatterplot showing the correlation Height and Release Time
+# Scatterplot showing the correlation Height and power
 
 plt.figure(figsize=(8,6))
 plt.scatter(data_made['height'], data_made['power'])
@@ -105,7 +105,7 @@ plt.title('Basketball Shots: Distance vs Speed')
 plt.grid(True)
 plt.show()
 
-# Scatterplot Showing the correlation between shot speed and acceleration
+# Scatterplot Showing the correlation between acceleration and velocity
 
 plt.figure(figsize=(8,6))
 plt.scatter(data_made['ca'], data_made['cv'])
@@ -116,13 +116,9 @@ plt.title('Basketball Shots: Acceleration vs Speed')
 plt.grid(True)
 plt.show()
 
-# Create a Combined Variable for Velocity and Do a scatterplot for it
 
 
-
-
-
-
+# Creates A Heatmap to view the linear relationship between all variables
 corr = Shots.corr()
 plt.figure(figsize=(12,9))
 sns.heatmap(corr, annot=True, cmap='YlGnBu')
